@@ -1,0 +1,30 @@
+
+
+
+--Hello Table!
+CREATE TABLE burritoplaces
+(id serial PRIMARY KEY,
+establishment varchar(50) not null,
+lat double precision,
+lon double precision);  
+--Hello Data!
+INSERT INTO burritoplaces(establishment, lat,lon)
+VALUES ('Verde Bueno Burrito', 35.484388,-97.505035)
+,('Locos Lobos', 35.496025,-97.510185)
+,('Captain Crustacean', 35.51468,-97.524347)
+,('Double Stuffers Cafe', 35.523762,-97.508039)
+,('Cafe Truncate of Watonga', 35.866413,-98.473206);
+
+
+SELECT *, point(-97.515678, 35.512363) <@> point(lon, lat)::point AS burrito_distance
+FROM burritoplaces
+WHERE (point(-97.515678, 35.512363) <@> point(lon, lat)) < 10 --feel free to play this!
+ORDER by burrito_distance;
+
+
+
+SELECT location,lat,long,fixed_text,term, point(-122.4167, 37.7833) <@> point(long, lat)::point AS tweet_distance
+FROM tweet_weather_table
+WHERE (point(-122.4167, 37.7833) <@> point(long, lat)) < 100 
+ORDER by tweet_distance;
+

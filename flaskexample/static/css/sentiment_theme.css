@@ -1,0 +1,14 @@
+.bad {
+  color:red;
+  }
+
+
+.good {
+  color:green;
+  }
+
+
+
+a:hover { 
+    background-color: yellow;
+}
