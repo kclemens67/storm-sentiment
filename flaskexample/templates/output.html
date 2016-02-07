@@ -84,9 +84,13 @@
         <p class="lead"><br><b>Average Temperature:</b> {{query_results}} degrees F</p>
         <p class="lead"><br><b>Weather Rating:</b> {{agg_weather_rating}} out of 8</p>
 
-        <p class="lead"><br><b>City Response Score:</b> <span style='color:Black;'>{{description}}</span></p>
-        <p class="lead"><br><b>Representative Tweets:</b> </p>
-        {% for message in example_tweet %}
+        <p class="lead"><br><b>City Response Score:</b> <span style='color:Black;'>{{description}}{{response_score}}</span></p>
+        <p class="lead"><br><b>Representative Negative Tweets:</b> </p>
+        {% for message in example_tweets_neg %}
+          <div class="lead">{{message}}</div>
+ {% endfor %}
+         <p class="lead"><br><b>Representative Postive Tweets:</b> </p>
+        {% for message in example_tweets_pos %}
           <div class="lead">{{message}}</div>
  {% endfor %}
       </div>
