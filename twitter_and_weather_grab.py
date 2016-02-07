@@ -106,4 +106,5 @@ if __name__ == '__main__':
     # In this example follow #programming tag
     # For more details refer to https://dev.twitter.com/docs/streaming-apis
     stream = tweepy.Stream(auth, l)
-    stream.filter(locations=[-127.441,24.087,-79.761,49.582])
+    stream.filter(locations=[-125.0011,24.9493,-66.9326,49.5904])
+
