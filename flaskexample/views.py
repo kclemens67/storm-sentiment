@@ -43,11 +43,6 @@ def cesareans_input():
 
 @app.route('/output')
 def cesareans_output():
-  #from sqlalchemy import create_engine
-  #from sqlalchemy_utils import database_exists, create_database
-  #import pandas as pd
-  #import psycopg2
-  #import numpy as np
 
   def postgres_connect():
     conn_string = "host='localhost' dbname='final_db' user='root'"
@@ -56,7 +51,8 @@ def cesareans_output():
     return() 
 
   def censor_tweets(tweet_list):
-    bad_word_list = ['fuck','fucking','shit','ass','dick','bitch']
+    bad_word_list = ['fuck','fucking','shit','ass','dick','bitch',"Fuck",
+                     'Fucking','Shit',"Ass","Dick","Bitch"]
     censored_list = []
     for item in tweet_list:
       for x in bad_word_list:
@@ -152,7 +148,21 @@ def cesareans_output():
   example_tweets_neg = neg_censored_list[:3]
   example_tweets_pos = pos_censored_list[:3]
 
+  if percent_diff < 0:
+    example_tweets_1 = neg_censored_list[:3]
+    example_tweets_2 = pos_censored_list[:3]
+    example_statement_2 = 'Most Positive Tweets:'
+    example_statement_1 = 'Most Negative Tweets:'
+    example_color_2 = 'color:Blue;'
+    example_color_1 = 'color:red;'
 
+  if percent_diff >= 0:
+    example_tweets_2 = neg_censored_list[:3]
+    example_tweets_1 = pos_censored_list[:3]
+    example_statement_1 = 'Most Positive Tweets:'
+    example_statement_2 = 'Most Negative Tweets:'
+    example_color_1 = 'color:Blue;'
+    example_color_2 = 'color:red;'
 
   if float(percent_diff) < -80:
       description = 'extremely negative'
@@ -221,12 +231,7 @@ def cesareans_output():
   test1,test2,test3,test4= find_color_value(int(percent_diff))
 
   rgb_color= 'color:rgb(%s,%s,%s);' %(int(math.floor(test1*255)),int(math.floor(test2*255)),int(math.floor(test3*255)))
-
-  print percent_diff
-  print description
-  print example_tweets_neg
-  print example_tweets_pos
-
+  
   the_result = avg_temp
 
-  return render_template("output.html",location=loc_input, query_results = the_result,agg_weather_rating=agg_weather_rating, response_score=percent_diff,example_tweets_pos=example_tweets_pos,example_tweets_neg=example_tweets_neg,description=description,test=rgb_color)
+  return render_template("output.html",location=loc_input, query_results = the_result,agg_weather_rating=agg_weather_rating, response_score=percent_diff,example_tweets_pos=example_tweets_pos,example_tweets_neg=example_tweets_neg,description=description,customRGB=rgb_color,example_tweets_1=example_tweets_1,example_tweets_2=example_tweets_2,example_statement_1=example_statement_1,example_statement_2=example_statement_2,exampleColOne=example_color_1,exampleColTwo=example_color_2)
