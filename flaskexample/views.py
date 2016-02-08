@@ -25,6 +25,11 @@ import nltk.classify
 from geopy.geocoders import Nominatim, GoogleV3
 import statistics
 from statistics import median, mean
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import matplotlib.cm as cm
+import matplotlib
+import math
 
 
 @app.route('/')
@@ -114,7 +119,7 @@ def cesareans_output():
       percent_diff = 0
       
 
-  percent_diff = percent_diff*100
+  percent_diff = float(percent_diff)*100
 
     # get response scores and weather ratings for most negative tweets
   neg_weather_rating = [ x for x in neg_data['weather_rating']]
@@ -149,32 +154,73 @@ def cesareans_output():
 
 
 
-  if int(percent_diff) < -75:
+  if float(percent_diff) < -80:
       description = 'extremely negative'
 
-  if -75 <= int(percent_diff) < -50:
+  if -80 <= float(percent_diff) < -40:
       description = 'very negative'
 
-  if -50 <= int(percent_diff) < -25:
+  if -40 <= float(percent_diff) < -20:
       description = 'negative'
 
-  if -25 <= int(percent_diff) < 0:
+  if -20 <= float(percent_diff) < 0:
       description = 'somewhat negative'
 
-  if int(percent_diff) > 75:
+  if float(percent_diff) > 80:
       description = 'extremely positive'
 
-  if 75 >= int(percent_diff) > 50:
+  if 80 >= float(percent_diff) > 40:
       description = 'very positive'
 
-  if 50 >= int(percent_diff) > 25:
+  if 40 >= float(percent_diff) > 20:
       description = 'positive'
 
-  if 25 >= int(percent_diff) > 0:
+  if 20 >= float(percent_diff) > 0:
       description = 'somewhat positive'
 
-  if int(percent_diff) == 0: 
+  if float(percent_diff) == 0: 
       description = " neutral"
+
+
+
+  def make_colormap(seq):
+      """Return a LinearSegmentedColormap
+      seq: a sequence of floats and RGB-tuples. The floats should be increasing
+      and in the interval (0,1).
+      """
+      seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
+      #print seq
+      #print list(seq)
+      cdict = {'red': [], 'green': [], 'blue': []}
+      for i, item in enumerate(seq):
+          #print i, item
+          if isinstance(item, float):
+              r1, g1, b1 = seq[i - 1]
+              r2, g2, b2 = seq[i + 1]
+              cdict['red'].append([item, r1, r2])
+              cdict['green'].append([item, g1, g2])
+              cdict['blue'].append([item, b1, b2])
+      return mcolors.LinearSegmentedColormap('CustomMap', cdict)
+
+
+  c = mcolors.ColorConverter().to_rgb
+  rvb = make_colormap(
+      [c('red'), c('violet'), 0.50, c('violet'), c('blue')])
+
+  def find_color_value(x):
+      min_val = -100
+      max_val = 100
+
+      my_cmap = cm.get_cmap(rvb) # or any other one
+      norm = matplotlib.colors.Normalize(min_val, max_val) # the color maps work for [0, 1]
+
+      x_i = x
+      color_i = my_cmap(norm(x_i)) # returns an rgba value
+      return(color_i)
+
+  test1,test2,test3,test4= find_color_value(int(percent_diff))
+
+  rgb_color= 'color:rgb(%s,%s,%s);' %(int(math.floor(test1*255)),int(math.floor(test2*255)),int(math.floor(test3*255)))
 
   print percent_diff
   print description
@@ -183,4 +229,4 @@ def cesareans_output():
 
   the_result = avg_temp
 
-  return render_template("output.html", query_results = the_result,agg_weather_rating=agg_weather_rating, response_score=percent_diff,example_tweets_pos=example_tweets_pos,example_tweets_neg=example_tweets_neg,description=description)
+  return render_template("output.html", query_results = the_result,agg_weather_rating=agg_weather_rating, response_score=percent_diff,example_tweets_pos=example_tweets_pos,example_tweets_neg=example_tweets_neg,description=description,test=rgb_color)
