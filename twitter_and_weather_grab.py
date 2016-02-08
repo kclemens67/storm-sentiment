@@ -15,7 +15,7 @@ time = datetime.datetime.now().strftime("%y%m%d%s")
 # Authentication details
 # Authentication keys for Twitter API
 consumer_key = "" 
-consumer_secret = "c"
+consumer_secret = ""
 access_token = ""
 access_token_secret = "" 
 
