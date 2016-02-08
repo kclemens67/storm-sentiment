@@ -14,14 +14,14 @@ time = datetime.datetime.now().strftime("%y%m%d%s")
 
 # Authentication details
 # Authentication keys for Twitter API
-consumer_key = "Po4DjalaCYX3OLNKRmvGtT8Of" 
-consumer_secret = "cOFRchBACeJtJ1V1r5PjmNJ6PQADa38viJbsRDG5GvDNYsvsAY"
-access_token = "4759540993-iiq5TsgYXwNBCsdmgu1TnS6ZugysAV0ZM9pWhI8"
-access_token_secret = "m1NPnLqRSJ4NXFZQK9moerwEVb8YhLnoyLWqc1kx6r2xx" 
+consumer_key = "" 
+consumer_secret = "c"
+access_token = ""
+access_token_secret = "" 
 
 # API key for open weather map API
 
-API_key = '6922b2f55edba960585b0f0c38aa17dd'
+API_key = ''
 owm = pyowm.OWM(API_key)
 
 
