@@ -229,4 +229,4 @@ def cesareans_output():
 
   the_result = avg_temp
 
-  return render_template("output.html", query_results = the_result,agg_weather_rating=agg_weather_rating, response_score=percent_diff,example_tweets_pos=example_tweets_pos,example_tweets_neg=example_tweets_neg,description=description,test=rgb_color)
+  return render_template("output.html",location=loc_input, query_results = the_result,agg_weather_rating=agg_weather_rating, response_score=percent_diff,example_tweets_pos=example_tweets_pos,example_tweets_neg=example_tweets_neg,description=description,test=rgb_color)

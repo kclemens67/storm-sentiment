@@ -46,7 +46,7 @@
        </div>
        <div class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
-           <li class="active"><a href="#">Home</a></li>
+           <li class="active"><a href="">Home</a></li>
            <li><a href="https://docs.google.com/presentation/d/1JD6fGj0-FPa-o5OLPG0nsbNZ9y6bnZBqJuo32rysvL4/edit?usp=sharing">About</a></li>
            <li><a href="https://www.linkedin.com/in/kristinaclemens">Contact</a></li>
          </ul>
@@ -80,11 +80,13 @@
   
     <div class="container">
       <div class="starter-template">
-        <h3>Your Results:</h3>
+        <h3>Your Results for:</h3>
+        <p class="lead"><br><b><font size="30">{{location}}</font></b></p>
         <p class="lead"><br><b>Average Temperature:</b> {{query_results}} degrees F</p>
         <p class="lead"><br><b>Weather Rating:</b> {{agg_weather_rating}} out of 8</p>
 
-        <p class="lead"><br><b>City Response Score:</b> <span style={{test}}>{{description}}{{response_score}}</span></p>
+        <p class="lead"><br><b>City Response Score: </b> <span style={{test}}><b><font size="30">{{description}}</font></b></span></p>
+        <img src="../static/colorbarscale.png" alt="Mountain View" style="width:50%;height:50%;">
         <p class="lead"><br><b>Most Negative Tweets:</b> </p>
         {% for message in example_tweets_neg %}
           <div class="lead">{{message}}</div>
