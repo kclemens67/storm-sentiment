@@ -52,7 +52,7 @@ def cesareans_output():
 
   def censor_tweets(tweet_list):
     bad_word_list = ['fuck','fucking','shit','ass','dick','bitch',"Fuck",
-                     'Fucking','Shit',"Ass","Dick","Bitch"]
+                     'Fucking','Shit',"Ass","Dick","Bitch",'Damn',"damn"]
     censored_list = []
     for item in tweet_list:
       for x in bad_word_list:
@@ -151,16 +151,16 @@ def cesareans_output():
   if percent_diff < 0:
     example_tweets_1 = neg_censored_list[:3]
     example_tweets_2 = pos_censored_list[:3]
-    example_statement_2 = 'Most Positive Tweets:'
-    example_statement_1 = 'Most Negative Tweets:'
+    example_statement_2 = 'Positive'
+    example_statement_1 = 'Negative'
     example_color_2 = 'color:Blue;'
     example_color_1 = 'color:red;'
 
   if percent_diff >= 0:
     example_tweets_2 = neg_censored_list[:3]
     example_tweets_1 = pos_censored_list[:3]
-    example_statement_1 = 'Most Positive Tweets:'
-    example_statement_2 = 'Most Negative Tweets:'
+    example_statement_1 = 'Positive'
+    example_statement_2 = 'Negative'
     example_color_1 = 'color:Blue;'
     example_color_2 = 'color:red;'
 
